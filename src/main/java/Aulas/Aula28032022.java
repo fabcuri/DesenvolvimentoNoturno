@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedList;
 
 public class Aula28032022 {
 	private final static String FILE_PATH= "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\contatos_serializable.csv";
@@ -49,12 +50,10 @@ public class Aula28032022 {
  
    
 }
+  
 	
-	
-	@Override
-	public String toString() {
-		return "Aula28032022 []";
-	}
+
+
 	public static void main(String[]args) throws IOException, ClassNotFoundException {
 		escreveObjeto();
 		leituraObjeto();
