@@ -58,7 +58,7 @@ public class Avaliacao01 {
 		produtos.add(new Produto("Notebook",8750.00, 68));
 		produtos.add(new Produto("Desktop",4780.20, 71));
 		produtos.add(new Produto("CamaKing",2101.21, 66));
-		produtos.add(new Produto("Microondas",540.33, 33));
+		produtos.add(new Produto("Microondas",540.20, 33));
 
 		File f = new File(FILE_PATH);
 		FileOutputStream fos = new FileOutputStream(f);
