@@ -16,7 +16,7 @@ import java.util.List;
  
 
 public class  Aula28032022 {
-    private final static String FILE_PATH = "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\contatos_serializable.csv";
+    private final static String FILE_PATH = "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\contatos_avaliacao.csv";
     public static class Contato implements Serializable{
         private String nome;
         private String telefone;
