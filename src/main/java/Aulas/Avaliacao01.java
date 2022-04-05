@@ -78,7 +78,7 @@ public class Avaliacao01 {
 					lerObjeto();
 					break;
 				case 3:
-					solicitarCodigo();
+					//solicitarCodigo();
 					pesquisarObjeto();
 					break;
 				case 4:
@@ -136,8 +136,9 @@ public class Avaliacao01 {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		List<Produto> produtos = (List<Produto>)ois.readObject();
 
-		for(Produto p: produtos) {
-			System.out.println(p);
+		for(int i =0;i<produtos.size();i++) {
+			
+			JOptionPane.showMessageDialog(null, "Produtos:\n"+produtos);
 		}
 	}
 	
@@ -153,10 +154,12 @@ public class Avaliacao01 {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		List<Produto> produtos = (ArrayList<Produto>)ois.readObject();
 
-		for(Produto p: produtos) {
-			short codigoInformado=0;
+			Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
+			for(Produto p: produtos) {
 			if(codigoInformado == p.getCodigo()) {
-				JOptionPane.showMessageDialog(null, "O pruduto pesquisado é:"+p.getNome()+p.getPreco()+p.getCodigo());	
+				JOptionPane.showMessageDialog(null, "O produto pesquisado é: "+p.getNome()+p.getPreco());	
+			}else {
+				JOptionPane.showMessageDialog(null, "O código informado não é valido");
 			}
 		}
 	}
