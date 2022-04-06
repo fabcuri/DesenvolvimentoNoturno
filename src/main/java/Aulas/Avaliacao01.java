@@ -20,14 +20,14 @@ public class Avaliacao01 {
 		private String nome;
 		private float preco;
 		private short codigo;
-		
+
 		@Override
 		public String toString() {
 			return "Produto=" + nome + ", Preço= R$" + preco + ", Código=" + codigo;
 		}
 		public Produto() {
 			super();
-				}
+		}
 		public Produto(String nome, double preco, int codigo) {
 			super();
 			this.nome = nome;
@@ -99,10 +99,7 @@ public class Avaliacao01 {
 
 		}
 	}
-	private static void informarLogObjeto() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public static void escreverObjeto() throws IOException{
 
 		String nome = JOptionPane.showInputDialog("Informe o nome:");
@@ -142,25 +139,25 @@ public class Avaliacao01 {
 		List<Produto> produtos = (List<Produto>)ois.readObject();
 
 		for(int i =0;i<produtos.size();i++) {
-			
+
 			JOptionPane.showMessageDialog(null, "Produtos:\n"+produtos);
 		}
 	}
-	
-	
+
+
 	public static void solicitarCodigo() throws IOException, ClassNotFoundException{
 		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
-		
+
 	}
-	
+
 	public static void pesquisarObjeto() throws IOException, ClassNotFoundException{
 		File f = new File(FILE_PATH);
 		FileInputStream fis = new FileInputStream(f);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		List<Produto> produtos = (ArrayList<Produto>)ois.readObject();
 
-			Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
-			for(Produto p: produtos) {
+		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
+		for(Produto p: produtos) {
 			if(codigoInformado == p.getCodigo()) {
 				JOptionPane.showMessageDialog(null, "O produto pesquisado é: "+p.getNome()+p.getPreco());	
 			}else {
@@ -168,7 +165,7 @@ public class Avaliacao01 {
 			}
 		}
 	}
-	
+
 
 	private static void excluirObjetoInformado() throws IOException, ClassNotFoundException {
 		File f = new File(FILE_PATH);
@@ -179,31 +176,35 @@ public class Avaliacao01 {
 		for(Produto p: produtos) {
 			if(codigoInformado == p.getCodigo()) {
 			}
-			
-	
+
+
 			try {
-			FileInputStream fis1 = new FileInputStream(f);
-			byte[] conteudo = fis1.readAllBytes();
-			String retorno = new String(conteudo);
-			String[] itens = retorno.split("\n");
-			String novoConteudo = "";
-			for(int i = 0; i<itens.length;i++) {
-						novoConteudo+= itens[i]+"\n";
+				FileInputStream fis1 = new FileInputStream(f);
+				byte[] conteudo = fis1.readAllBytes();
+				String retorno = new String(conteudo);
+				String[] itens = retorno.split("\n");
+				String novoConteudo = "";
+				for(int i = 0; i<itens.length;i++) {
+					novoConteudo+= itens[i]+"\n";
 
+				}
+				FileOutputStream fos = new FileOutputStream(f);
+				fos.write(novoConteudo.getBytes());
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			FileOutputStream fos = new FileOutputStream(f);
-			fos.write(novoConteudo.getBytes());
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	
-	
 
-		        
-		        
-		        
-		    }
+
+
+
+
+
+		}
+	}
+	private static void informarLogObjeto() {
+		// TODO Auto-generated method stub
+
 	}
 }
 
