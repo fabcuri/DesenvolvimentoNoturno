@@ -2,6 +2,7 @@ package Aulas;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -82,8 +83,8 @@ public class Avaliacao01 {
 					pesquisarObjeto();
 					break;
 				case 4:
-					solicitarCodigo();
-					excluirUltimoObjeto();
+					//solicitarCodigo();
+					excluirObjetoInformado();
 					break;
 				case 5:
 					informarLogObjeto();
@@ -97,6 +98,10 @@ public class Avaliacao01 {
 			}
 
 		}
+	}
+	private static void informarLogObjeto() {
+		// TODO Auto-generated method stub
+		
 	}
 	public static void escreverObjeto() throws IOException{
 
@@ -165,16 +170,25 @@ public class Avaliacao01 {
 	}
 	
 
-	private static void excluirUltimoObjeto() {
-		File f = new File (FILE_PATH);
-		try {
-			FileInputStream fis = new FileInputStream(f);
-			byte[] conteudo = fis.readAllBytes();
+	private static void excluirObjetoInformado() throws IOException, ClassNotFoundException {
+		File f = new File(FILE_PATH);
+		FileInputStream fis = new FileInputStream(f);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		List<Produto> produtos = (ArrayList<Produto>)ois.readObject();
+		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
+		for(Produto p: produtos) {
+			if(codigoInformado == p.getCodigo()) {
+			}
+			
+	
+			try {
+			FileInputStream fis1 = new FileInputStream(f);
+			byte[] conteudo = fis1.readAllBytes();
 			String retorno = new String(conteudo);
 			String[] itens = retorno.split("\n");
 			String novoConteudo = "";
-			for(int i = 0; i< (itens.length -1); i++) {
-				novoConteudo+= itens[i]+"\n";
+			for(int i = 0; i<itens.length;i++) {
+						novoConteudo+= itens[i]+"\n";
 
 			}
 			FileOutputStream fos = new FileOutputStream(f);
@@ -183,14 +197,22 @@ public class Avaliacao01 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
 	
-	public static void informarLogObjeto() throws IOException, ClassNotFoundException{
+	
 
+		        
+		        
+		        
+		    }
 	}
-
-
 }
+
+		 
+
+		    
+		 
+
+		
 
 
 	
