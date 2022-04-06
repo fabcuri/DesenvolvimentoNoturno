@@ -75,8 +75,9 @@ public class Avaliacao01 {
 				case 1:
 					escreverObjeto();
 					break;
-				case 2:
-					lerObjeto();
+				case 2:		
+					lerModel();
+					lerView();
 					break;
 				case 3:
 					//solicitarCodigo();
@@ -87,7 +88,7 @@ public class Avaliacao01 {
 					excluirObjetoInformado();
 					break;
 				case 5:
-					informarLogObjeto();
+					LogAvaliacao01.logAvaliacao();
 					break;
 				default:
 					opcao = -1;
@@ -131,18 +132,28 @@ public class Avaliacao01 {
 
 
 
-	public static void lerObjeto() throws IOException, ClassNotFoundException{
 
-		File f = new File(FILE_PATH);
-		FileInputStream fis = new FileInputStream(f);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		List<Produto> produtos = (List<Produto>)ois.readObject();
-
-		for(int i =0;i<produtos.size();i++) {
-
-			JOptionPane.showMessageDialog(null, "Produtos:\n"+produtos);
-		}
+	private static void lerView() {
+		String conteudo = lerModel();
+		int linhas = conteudo.split("\n").length;
+		JOptionPane.showMessageDialog(null, "Total de itens:"+linhas +"\n"+conteudo);
 	}
+
+	private static String lerModel() {
+		String retorno = "";
+		File f = new File (FILE_PATH);
+		try {
+			FileInputStream fis = new FileInputStream(f);
+			byte[] conteudo = fis.readAllBytes();
+			retorno = new String(conteudo);
+			retorno = retorno.replaceAll(";", " - ");
+			fis.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return retorno;
+	}
+
 
 
 	public static void solicitarCodigo() throws IOException, ClassNotFoundException{
@@ -151,19 +162,22 @@ public class Avaliacao01 {
 	}
 
 	public static void pesquisarObjeto() throws IOException, ClassNotFoundException{
+	
+		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
 		File f = new File(FILE_PATH);
 		FileInputStream fis = new FileInputStream(f);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		List<Produto> produtos = (ArrayList<Produto>)ois.readObject();
-
-		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
 		for(Produto p: produtos) {
 			if(codigoInformado == p.getCodigo()) {
 				JOptionPane.showMessageDialog(null, "O produto pesquisado é: "+p.getNome()+p.getPreco());	
 			}else {
 				JOptionPane.showMessageDialog(null, "O código informado não é valido");
 			}
+			
 		}
+		fis.close();
+		ois.close();
 	}
 
 
@@ -202,11 +216,10 @@ public class Avaliacao01 {
 
 		}
 	}
-	private static void informarLogObjeto() {
-		// TODO Auto-generated method stub
+
 
 	}
-}
+
 
 		 
 

@@ -47,8 +47,8 @@ public class LogAvaliacao01 {
     }
     
     
-    public static void main(String[] args) throws FileNotFoundException, IOException /* throws Exception */ {
-        final String filePath = "C:\\Users\\rafael.queiroz\\Desktop\\atividade4.txt"; 
+    public static void criarLog() throws IOException{
+        final String filePath = "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\atividade4.txt"; 
         final String SEPARADOR = "$#";
         File f = new File(filePath);
         //ArrayList<RegistroAtividade4> lista = new ArrayList<RegistroAtividade4>();
@@ -93,4 +93,11 @@ public class LogAvaliacao01 {
             //Exception e = new Exception("Arquivo não encontrado...."+ filePath);   //throw e;
         }
     }
+
+
+	public static void logAvaliacao() {
+		char[] RegistroAtividade4 = null;
+		System.out.println(RegistroAtividade4);
+		
+	}
 }
