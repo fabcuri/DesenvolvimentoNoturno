@@ -1,6 +1,7 @@
-package Aulas;
+package Avaliacao;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,8 +14,10 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+
+
 public class Avaliacao01 {
-	private final static String FILE_PATH = "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\contatos_avaliacao.csv";
+	private final static String FILE_PATH = "C:\\Users\\SAMSUNG\\Desktop\\teams senac noturno\\produtos_avaliacao.csv";
 	public static class Produto implements Serializable{
 
 		private String nome;
@@ -74,21 +77,26 @@ public class Avaliacao01 {
 				switch(opcao) {
 				case 1:
 					escreverObjeto();
+					Log.escreverLog1();
 					break;
 				case 2:		
 					lerModel();
 					lerView();
+					Log.escreverLog2();
 					break;
 				case 3:
 					//solicitarCodigo();
 					pesquisarObjeto();
+					Log.escreverLog3();
 					break;
 				case 4:
 					//solicitarCodigo();
 					excluirObjetoInformado();
+					Log.escreverLog4();
 					break;
 				case 5:
-					LogAvaliacao01.logAvaliacao();
+					Log.lerModelLog();
+					Log.lerViewLog();
 					break;
 				default:
 					opcao = -1;
@@ -100,6 +108,7 @@ public class Avaliacao01 {
 
 		}
 	}
+
 
 	public static void escreverObjeto() throws IOException{
 
@@ -162,7 +171,7 @@ public class Avaliacao01 {
 	}
 
 	public static void pesquisarObjeto() throws IOException, ClassNotFoundException{
-	
+
 		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
 		File f = new File(FILE_PATH);
 		FileInputStream fis = new FileInputStream(f);
@@ -174,7 +183,7 @@ public class Avaliacao01 {
 			}else {
 				JOptionPane.showMessageDialog(null, "O código informado não é valido");
 			}
-			
+
 		}
 		fis.close();
 		ois.close();
@@ -218,7 +227,8 @@ public class Avaliacao01 {
 	}
 
 
-	}
+
+}
 
 
 		 
