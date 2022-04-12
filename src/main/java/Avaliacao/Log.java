@@ -144,7 +144,7 @@ public class Log {
 	public static void lerViewLog() {
 		String conteudo = lerModelLog();
 		int linhas = conteudo.split("\n").length;
-		JOptionPane.showMessageDialog(null, "Total de itens:"+linhas +"\n"+conteudo);
+		JOptionPane.showMessageDialog(null, "Total de logs:"+linhas +"\n"+conteudo);
 	}
 
 	public static String lerModelLog() {

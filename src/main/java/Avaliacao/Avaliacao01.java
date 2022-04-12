@@ -2,6 +2,7 @@ package Avaliacao;
 
 import java.io.File;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,10 +10,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import Avaliacao.Avaliacao01.Produto;
+
 
 
 
@@ -170,25 +178,37 @@ public class Avaliacao01 {
 
 	}
 
-	public static void pesquisarObjeto() throws IOException, ClassNotFoundException{
-
+	public static Produto[] pesquisarObjeto() throws IOException, ClassNotFoundException{
+		File f = new File (FILE_PATH);
 		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
-		File f = new File(FILE_PATH);
-		FileInputStream fis = new FileInputStream(f);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		List<Produto> produtos = (ArrayList<Produto>)ois.readObject();
-		for(Produto p: produtos) {
-			if(codigoInformado == p.getCodigo()) {
-				JOptionPane.showMessageDialog(null, "O produto pesquisado é: "+p.getNome()+p.getPreco());	
-			}else {
-				JOptionPane.showMessageDialog(null, "O código informado não é valido");
+		Produto[] lista = null;
+		try{
+			FileInputStream fis = new FileInputStream(f);
+			byte[] dados = fis.readAllBytes();
+			String conteudoArquivo = new String(dados);
+			String[] linhas = conteudoArquivo.split("\r\n");
+			lista = new Produto[linhas.length];
+			int index = 0;
+			for(String linha: linhas) {
+				Produto p = new Produto();
+				lista[index] = p;
+				String[] colunas = linha.split(";");
+				p.setCodigo(Short.parseShort(colunas[2]));
+				p.setNome(colunas[0]);
+				p.setPreco(Float.parseFloat(colunas[1]));
+				index++;
+				if(codigoInformado == p.getCodigo()) {
+					JOptionPane.showMessageDialog(null, "O produto pesquisado é: "+p.getNome()+p.getPreco());	
+				}else {
+					JOptionPane.showMessageDialog(null, "O código informado não é valido");
+				}
 			}
 
+		}catch(IOException e) {
+			e.printStackTrace();
 		}
-		fis.close();
-		ois.close();
+		return lista;	
 	}
-
 
 	private static void excluirObjetoInformado() throws IOException, ClassNotFoundException {
 		File f = new File(FILE_PATH);
@@ -198,6 +218,9 @@ public class Avaliacao01 {
 		Short codigoInformado = Short.parseShort(JOptionPane.showInputDialog("Qual o código do produto?"));
 		for(Produto p: produtos) {
 			if(codigoInformado == p.getCodigo()) {
+				JOptionPane.showMessageDialog(null, "O produto a excluir é: "+p.getNome()+p.getPreco());	
+			}else {
+				JOptionPane.showMessageDialog(null, "O código informado não é valido");
 			}
 
 
@@ -218,14 +241,8 @@ public class Avaliacao01 {
 				e.printStackTrace();
 			}
 
-
-
-
-
-
 		}
 	}
-
 
 
 }
