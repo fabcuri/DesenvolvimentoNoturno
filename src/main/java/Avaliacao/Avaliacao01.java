@@ -34,7 +34,7 @@ public class Avaliacao01 {
 
 		@Override
 		public String toString() {
-			return "Produto=" + nome + ", Preço= R$" + preco + ", Código=" + codigo;
+			return "O Produto é =" + nome + ", Preço= R$" + preco + ", Código=" + codigo;
 		}
 		public Produto() {
 			super();
