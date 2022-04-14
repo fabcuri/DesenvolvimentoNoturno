@@ -142,7 +142,7 @@ public class Executavel {
 		String[] linhas=conteudoArquivoCSV.split("\n");
 
 
-
+		
 		String[][] linhasDeDados=new String[linhas.length][3];
 		for(int i=0;i<linhas.length;i++) {
 			String[] campos=linhas[i].split(";");
@@ -165,21 +165,23 @@ public class Executavel {
 
 
 		String[][] linhasDeDados=new String[linhas.length][3];
+		String novoConteudo="";
 		for(int i=0;i<linhas.length;i++) {
 			String[] campos=linhas[i].split(";");
 			if (codigoInformado.equals(campos[2])){
 				campos[0]=null;
 				campos[1]=null;
-				String[] novosCampos=campos;
-				System.out.println(novosCampos);
+				novoConteudo=campos[i]+"\n";
 				break;
 			}
 		}
+		FileOutputStream fos= new FileOutputStream(f);
+		fos.write(novoConteudo.getBytes());
+		fos.close();
 		
 				}
 		
 	}
-
 
 
 
